@@ -147,13 +147,14 @@ function Hero() {
                     </div>
                 </motion.div>
 
-                {/* Right Side */}
+                {/* Right Side - Profile Photo */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, delay: 0.2 }}
                     className="relative hidden justify-center lg:flex"
                 >
+                    {/* Rotating Outer Circle */}
                     <motion.div
                         animate={{ rotate: 360 }}
                         transition={{
@@ -161,27 +162,26 @@ function Hero() {
                             repeat: Infinity,
                             ease: "linear",
                         }}
-                        className="relative flex h-[420px] w-[420px] items-center justify-center rounded-full border border-cyan-400/20"
+                        className="absolute h-[420px] w-[420px] rounded-full border border-cyan-400/20"
                     >
-
                         {/* Outer Glow */}
                         <div className="absolute inset-6 rounded-full border border-cyan-400/10" />
-
-                        {/* Inner Circle */}
-                        <div className="flex h-72 w-72 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/5 shadow-[0_0_100px_rgba(34,211,238,0.15)]">
-
-                            <div className="text-center">
-                                <p className="text-6xl font-bold text-white">
-                                    {"</>"}
-                                </p>
-
-                                <p className="mt-3 text-sm uppercase tracking-[0.3em] text-gray-400">
-                                    Code • Create • Build
-                                </p>
-                            </div>
-
-                        </div>
                     </motion.div>
+
+                    {/* Profile Photo */}
+                    <div className="relative flex h-72 w-72 items-center justify-center overflow-hidden rounded-full border-2 border-cyan-400/40 bg-cyan-400/10 shadow-[0_0_100px_rgba(34,211,238,0.18)]">
+                        <img
+                            src="/profile.jpg"
+                            alt="Chamuditha - Frontend Developer"
+                            className="h-full w-full object-cover object-top"
+                        />
+
+                        {/* Photo Overlay */}
+                        <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-t from-[#050505]/30 via-transparent to-cyan-400/5" />
+                    </div>
+
+                    {/* Small Cyan Glow */}
+                    <div className="absolute h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl -z-10" />
                 </motion.div>
 
             </div>
