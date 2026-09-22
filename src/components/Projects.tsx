@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
 
@@ -27,6 +28,7 @@ const projects = [
         technologies: ["React.js", "TypeScript", "Tailwind CSS"],
         liveUrl: "https://md-gunasena.vercel.app/",
         githubUrl: "#",
+        video: "/videos/md-gunasena.mp4",
     },
     {
         title: "Safari Tales by Podi",
@@ -35,6 +37,7 @@ const projects = [
         technologies: ["React.js", "JavaScript", "Tailwind CSS"],
         liveUrl: "https://safaritalesbypodi.com/",
         githubUrl: "#",
+        video: "/videos/safari-tales.mp4",
     },
     {
         title: "Personal Portfolio",
@@ -43,6 +46,7 @@ const projects = [
         technologies: ["React.js", "TypeScript", "Tailwind CSS"],
         liveUrl: "#",
         githubUrl: "#",
+        video: "/videos/portfolio.mp4",
     },
 ]
 
@@ -94,17 +98,36 @@ function Projects() {
                             className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/30"
                         >
                             {/* Project Preview */}
-                            <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-cyan-400/10 via-transparent to-blue-500/5">
-                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.12),transparent_60%)]" />
+                            <div className="relative h-52 overflow-hidden">
 
-                                <div className="relative flex h-24 w-24 items-center justify-center rounded-3xl border border-cyan-400/20 bg-cyan-400/10 shadow-[0_0_60px_rgba(34,211,238,0.08)] transition-all duration-500 group-hover:scale-110">
-                                    <span className="text-3xl font-bold text-cyan-400">
-                                        {"</>"}
-                                    </span>
+                                {/* Background Video */}
+                                <video
+                                    src={project.video}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+
+                                {/* Dark Overlay */}
+                                <div className="absolute inset-0 bg-black/55" />
+
+                                {/* Cyan Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-transparent to-blue-500/10" />
+
+                                {/* Center Project Icon */}
+                                <div className="relative z-10 flex h-full items-center justify-center">
+                                    <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-cyan-400/20 bg-black/40 shadow-[0_0_60px_rgba(34,211,238,0.12)] backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:border-cyan-400/40">
+                                        <span className="text-3xl font-bold text-cyan-400">
+                                            {"</>"}
+                                        </span>
+                                    </div>
                                 </div>
 
-                                {/* Overlay */}
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     <a
                                         href={project.liveUrl}
                                         target="_blank"
