@@ -1,3 +1,4 @@
+import CursorSpotlight from "./components/CursorSpotlight"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
@@ -12,6 +13,9 @@ import Footer from "./components/Footer"
 function App() {
   return (
     <>
+      {/* Global Cursor Animation */}
+      <CursorSpotlight />
+
       <Navbar />
 
       <main>
