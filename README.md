@@ -1,73 +1,81 @@
-# React + TypeScript + Vite
+# 🚀 Chamuditha | Frontend Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My personal developer portfolio built with **React**, **TypeScript** and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+🌐 **Live Site:** [chamuditha-portfolio.vercel.app](https://chamuditha-portfolio.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ⚡ Built with React 19 + TypeScript + Vite 7
+- 🎨 Styled with Tailwind CSS v4
+- 🎭 Smooth animations with Framer Motion
+- 📧 Contact form powered by EmailJS
+- 🔍 SEO optimized (Open Graph, JSON-LD, Twitter Cards)
+- 📱 Fully responsive design
+- 🚀 Deployed on Vercel
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Technology | Version |
+|---|---|
+| React | 19 |
+| TypeScript | 5.9 |
+| Vite | 7 |
+| Tailwind CSS | 4 |
+| Framer Motion | 13 |
+| EmailJS | 4 |
+| Lucide React | 1.47 |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📁 Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+my-portfolio/
+├── public/
+│   ├── favicon.svg
+│   └── og-image.jpg
+├── src/
+│   ├── components/
+│   ├── assets/
+│   ├── App.tsx
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Clone the repo
+git clone https://github.com/chamudithachiran/my-portfolio.git
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Navigate into the project
+cd my-portfolio
+
+# Install dependencies
+npm install
+
+# Run locally
+npm run dev
 ```
+
+## 📦 Build for Production
+
+```bash
+npm run build
+npm run preview
+```
+
+## 📬 Contact
+
+- 📧 [jayamuthupemarathna@gmail.com](mailto:jayamuthupemarathna@gmail.com)
+- 💼 [LinkedIn](https://www.linkedin.com/in/chamuditha-pemarathna/)
+- 🐙 [GitHub](https://github.com/chamudithachiran)
+
+---
+
+⭐ If you like this project, give it a star!
