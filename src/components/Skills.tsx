@@ -1,4 +1,3 @@
-
 import {
     motion,
     useMotionValue,
@@ -27,11 +26,11 @@ const skillCategories = [
         description:
             "Building modern, responsive and interactive user interfaces with a strong focus on user experience.",
         skills: [
-            "React.js",
-            "TypeScript",
-            "JavaScript",
-            "Tailwind CSS",
-            "Next.js",
+            { name: "React.js", level: 90 },
+            { name: "TypeScript", level: 82 },
+            { name: "JavaScript", level: 88 },
+            { name: "Tailwind CSS", level: 92 },
+            { name: "Next.js", level: 70 },
         ],
     },
     {
@@ -40,7 +39,11 @@ const skillCategories = [
         icon: Server,
         description:
             "Developing server-side applications, APIs and backend services for modern web applications.",
-        skills: ["Node.js", "REST APIs", "Express.js"],
+        skills: [
+            { name: "Node.js", level: 72 },
+            { name: "REST APIs", level: 78 },
+            { name: "Express.js", level: 68 },
+        ],
     },
     {
         number: "03",
@@ -48,7 +51,10 @@ const skillCategories = [
         icon: Database,
         description:
             "Working with databases and application data to build reliable and scalable applications.",
-        skills: ["MongoDB", "Firebase"],
+        skills: [
+            { name: "MongoDB", level: 70 },
+            { name: "Firebase", level: 65 },
+        ],
     },
     {
         number: "04",
@@ -56,7 +62,12 @@ const skillCategories = [
         icon: GitBranch,
         description:
             "Managing source code, branches and collaborative development workflows using Git.",
-        skills: ["Git", "GitHub", "Branching", "Pull Requests"],
+        skills: [
+            { name: "Git", level: 88 },
+            { name: "GitHub", level: 85 },
+            { name: "Branching", level: 80 },
+            { name: "Pull Requests", level: 78 },
+        ],
     },
     {
         number: "05",
@@ -65,10 +76,10 @@ const skillCategories = [
         description:
             "Creating clean, reusable and responsive interfaces with modern development practices.",
         skills: [
-            "Responsive Design",
-            "Component Architecture",
-            "UI Development",
-            "API Integration",
+            { name: "Responsive Design", level: 92 },
+            { name: "Component Architecture", level: 85 },
+            { name: "UI Development", level: 88 },
+            { name: "API Integration", level: 78 },
         ],
     },
     {
@@ -77,9 +88,76 @@ const skillCategories = [
         icon: Wrench,
         description:
             "Using modern development tools to improve productivity, testing and application development.",
-        skills: ["VS Code", "Vite", "NPM", "Postman"],
+        skills: [
+            { name: "VS Code", level: 95 },
+            { name: "Vite", level: 88 },
+            { name: "NPM", level: 85 },
+            { name: "Postman", level: 75 },
+        ],
     },
 ]
+
+/* =========================
+   SKILL PROGRESS BAR
+========================= */
+
+function SkillBar({
+    name,
+    level,
+    delay,
+}: {
+    name: string
+    level: number
+    delay: number
+}) {
+    return (
+        <div className="group/bar">
+            <div className="mb-1.5 flex items-center justify-between">
+                <span className="text-[11px] font-medium text-gray-400 transition-colors duration-300 group-hover/bar:text-cyan-400">
+                    {name}
+                </span>
+                <motion.span
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: delay + 0.3, duration: 0.4 }}
+                    className="text-[10px] font-semibold text-cyan-400/70"
+                >
+                    {level}%
+                </motion.span>
+            </div>
+
+            {/* Track */}
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+                {/* Fill */}
+                <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${level}%` }}
+                    viewport={{ once: true }}
+                    transition={{
+                        duration: 1.1,
+                        delay,
+                        ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="relative h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
+                >
+                    {/* Shimmer */}
+                    <motion.span
+                        animate={{ x: ["-100%", "200%"] }}
+                        transition={{
+                            duration: 1.8,
+                            delay: delay + 0.8,
+                            repeat: Infinity,
+                            repeatDelay: 3,
+                            ease: "easeInOut",
+                        }}
+                        className="absolute inset-0 w-1/2 rounded-full bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                    />
+                </motion.div>
+            </div>
+        </div>
+    )
+}
 
 /* =========================
    3D SKILL CARD
@@ -97,17 +175,8 @@ function SkillCard({
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
 
-    const rotateX = useTransform(
-        mouseY,
-        [-0.5, 0.5],
-        [7, -7]
-    )
-
-    const rotateY = useTransform(
-        mouseX,
-        [-0.5, 0.5],
-        [-7, 7]
-    )
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], [7, -7])
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], [-7, 7])
 
     const springRotateX = useSpring(rotateX, {
         stiffness: 180,
@@ -123,20 +192,9 @@ function SkillCard({
         event: React.MouseEvent<HTMLElement>
     ) => {
         if (!cardRef.current) return
-
-        const rect =
-            cardRef.current.getBoundingClientRect()
-
-        const x =
-            (event.clientX - rect.left) /
-            rect.width -
-            0.5
-
-        const y =
-            (event.clientY - rect.top) /
-            rect.height -
-            0.5
-
+        const rect = cardRef.current.getBoundingClientRect()
+        const x = (event.clientX - rect.left) / rect.width - 0.5
+        const y = (event.clientY - rect.top) / rect.height - 0.5
         mouseX.set(x)
         mouseY.set(y)
     }
@@ -151,18 +209,9 @@ function SkillCard({
     return (
         <motion.article
             ref={cardRef}
-            initial={{
-                opacity: 0,
-                y: 50,
-            }}
-            whileInView={{
-                opacity: 1,
-                y: 0,
-            }}
-            viewport={{
-                once: true,
-                amount: 0.15,
-            }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{
                 duration: 0.7,
                 delay: index * 0.1,
@@ -196,10 +245,7 @@ function SkillCard({
                 sm:p-7
             "
         >
-            {/* =========================
-                AMBIENT CARD GLOW
-            ========================= */}
-
+            {/* Ambient Glow */}
             <motion.div
                 animate={{
                     scale: [1, 1.08, 1],
@@ -224,10 +270,7 @@ function SkillCard({
                 "
             />
 
-            {/* =========================
-                HOVER GRADIENT
-            ========================= */}
-
+            {/* Hover Gradient */}
             <div
                 className="
                     pointer-events-none
@@ -245,31 +288,11 @@ function SkillCard({
                 "
             />
 
-            {/* =========================
-                TOP ROW
-            ========================= */}
-
-            <div
-                className="
-                    relative
-                    z-10
-                    flex
-                    items-start
-                    justify-between
-                "
-            >
-                {/* Icon */}
-
+            {/* Top Row */}
+            <div className="relative z-10 flex items-start justify-between">
                 <motion.div
-                    whileHover={{
-                        rotate: 8,
-                        scale: 1.08,
-                    }}
-                    transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 18,
-                    }}
+                    whileHover={{ rotate: 8, scale: 1.08 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 18 }}
                     className="
                         flex
                         h-14
@@ -291,151 +314,41 @@ function SkillCard({
                     <Icon
                         size={25}
                         strokeWidth={1.8}
-                        className="
-                            text-cyan-400
-                            drop-shadow-[0_0_10px_rgba(34,211,238,0.35)]
-                        "
+                        className="text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.35)]"
                     />
                 </motion.div>
 
-                {/* Number */}
-
-                <span
-                    className="
-                        text-[11px]
-                        font-semibold
-                        tracking-[0.25em]
-                        text-gray-700
-                        transition-colors
-                        duration-300
-                        group-hover:text-cyan-400/40
-                    "
-                >
+                <span className="text-[11px] font-semibold tracking-[0.25em] text-gray-700 transition-colors duration-300 group-hover:text-cyan-400/40">
                     {category.number}
                 </span>
             </div>
 
-            {/* =========================
-                TITLE
-            ========================= */}
-
-            <h3
-                className="
-                    relative
-                    z-10
-                    mt-7
-                    text-xl
-                    font-bold
-                    text-white
-                    transition-colors
-                    duration-300
-                    group-hover:text-cyan-400
-                "
-            >
+            {/* Title */}
+            <h3 className="relative z-10 mt-7 text-xl font-bold text-white transition-colors duration-300 group-hover:text-cyan-400">
                 {category.title}
             </h3>
 
-            {/* =========================
-                DESCRIPTION
-            ========================= */}
-
-            <p
-                className="
-                    relative
-                    z-10
-                    mt-3
-                    text-sm
-                    leading-7
-                    text-gray-500
-                "
-            >
+            {/* Description */}
+            <p className="relative z-10 mt-3 text-sm leading-7 text-gray-500">
                 {category.description}
             </p>
 
-            {/* =========================
-                DIVIDER
-            ========================= */}
+            {/* Divider */}
+            <div className="relative z-10 my-5 h-px bg-gradient-to-r from-white/[0.08] via-white/[0.05] to-transparent" />
 
-            <div
-                className="
-                    relative
-                    z-10
-                    my-6
-                    h-px
-                    bg-gradient-to-r
-                    from-white/[0.08]
-                    via-white/[0.05]
-                    to-transparent
-                "
-            />
-
-            {/* =========================
-                SKILLS
-            ========================= */}
-
-            <div
-                className="
-                    relative
-                    z-10
-                    mt-auto
-                    flex
-                    flex-wrap
-                    gap-2
-                "
-            >
-                {category.skills.map(
-                    (skill, skillIndex) => (
-                        <motion.span
-                            key={skill}
-                            initial={{
-                                opacity: 0,
-                                y: 8,
-                            }}
-                            whileInView={{
-                                opacity: 1,
-                                y: 0,
-                            }}
-                            viewport={{
-                                once: true,
-                            }}
-                            transition={{
-                                duration: 0.35,
-                                delay:
-                                    index * 0.1 +
-                                    skillIndex * 0.05,
-                            }}
-                            whileHover={{
-                                y: -3,
-                                scale: 1.04,
-                            }}
-                            className="
-                                cursor-default
-                                rounded-full
-                                border
-                                border-white/[0.08]
-                                bg-white/[0.025]
-                                px-3
-                                py-1.5
-                                text-[11px]
-                                font-medium
-                                text-gray-400
-                                transition-colors
-                                duration-300
-                                hover:border-cyan-400/30
-                                hover:bg-cyan-400/[0.07]
-                                hover:text-cyan-400
-                            "
-                        >
-                            {skill}
-                        </motion.span>
-                    )
-                )}
+            {/* Skill Progress Bars */}
+            <div className="relative z-10 mt-auto space-y-3">
+                {category.skills.map((skill, skillIndex) => (
+                    <SkillBar
+                        key={skill.name}
+                        name={skill.name}
+                        level={skill.level}
+                        delay={index * 0.1 + skillIndex * 0.07}
+                    />
+                ))}
             </div>
 
-            {/* =========================
-                BOTTOM ACCENT
-            ========================= */}
-
+            {/* Bottom Accent */}
             <div
                 className="
                     pointer-events-none
@@ -454,17 +367,7 @@ function SkillCard({
             />
 
             {/* Border */}
-
-            <div
-                className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    rounded-[28px]
-                    border
-                    border-white/[0.03]
-                "
-            />
+            <div className="pointer-events-none absolute inset-0 rounded-[28px] border border-white/[0.03]" />
         </motion.article>
     )
 }
@@ -477,20 +380,9 @@ function Skills() {
     return (
         <section
             id="skills"
-            className="
-                relative
-                overflow-hidden
-                bg-[#080808]
-                px-5
-                py-24
-                sm:px-6
-                sm:py-32
-            "
+            className="relative overflow-hidden bg-[#080808] px-5 py-24 sm:px-6 sm:py-32"
         >
-            {/* =========================
-                BACKGROUND
-            ========================= */}
-
+            {/* Background */}
             <div className="pointer-events-none absolute inset-0">
                 <motion.div
                     animate={{
@@ -502,16 +394,7 @@ function Skills() {
                         repeat: Infinity,
                         ease: "easeInOut",
                     }}
-                    className="
-                        absolute
-                        -left-40
-                        top-1/4
-                        h-[400px]
-                        w-[400px]
-                        rounded-full
-                        bg-cyan-500
-                        blur-[150px]
-                    "
+                    className="absolute -left-40 top-1/4 h-[400px] w-[400px] rounded-full bg-cyan-500 blur-[150px]"
                 />
 
                 <motion.div
@@ -524,185 +407,61 @@ function Skills() {
                         repeat: Infinity,
                         ease: "easeInOut",
                     }}
-                    className="
-                        absolute
-                        -right-40
-                        bottom-0
-                        h-[450px]
-                        w-[450px]
-                        rounded-full
-                        bg-blue-500
-                        blur-[160px]
-                    "
+                    className="absolute -right-40 bottom-0 h-[450px] w-[450px] rounded-full bg-blue-500 blur-[160px]"
                 />
 
-                {/* Grid */}
-
-                <div
-                    className="
-                        absolute
-                        inset-0
-                        opacity-40
-                        [background-image:linear-gradient(rgba(34,211,238,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.018)_1px,transparent_1px)]
-                        [background-size:70px_70px]
-                    "
-                />
+                <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(34,211,238,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.018)_1px,transparent_1px)] [background-size:70px_70px]" />
             </div>
 
-            <div
-                className="
-                    relative
-                    z-10
-                    mx-auto
-                    max-w-7xl
-                "
-            >
-                {/* =========================
-                    HEADING
-                ========================= */}
+            <div className="relative z-10 mx-auto max-w-7xl">
 
+                {/* Heading */}
                 <motion.div
-                    initial={{
-                        opacity: 0,
-                        y: 35,
-                    }}
-                    whileInView={{
-                        opacity: 1,
-                        y: 0,
-                    }}
-                    viewport={{
-                        once: true,
-                        amount: 0.2,
-                    }}
-                    transition={{
-                        duration: 0.8,
-                        ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="
-                        mx-auto
-                        mb-14
-                        max-w-3xl
-                        text-center
-                        sm:mb-16
-                    "
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    className="mx-auto mb-14 max-w-3xl text-center sm:mb-16"
                 >
                     <div className="mb-3 flex items-center justify-center gap-3">
                         <span className="h-px w-8 bg-cyan-400/50 sm:w-10" />
-
-                        <p
-                            className="
-                                text-xs
-                                font-semibold
-                                uppercase
-                                tracking-[0.3em]
-                                text-cyan-400
-                                sm:text-sm
-                            "
-                        >
+                        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400 sm:text-sm">
                             My Skills
                         </p>
-
                         <span className="h-px w-8 bg-cyan-400/50 sm:w-10" />
                     </div>
 
-                    <h2
-                        className="
-                            text-3xl
-                            font-bold
-                            tracking-tight
-                            text-white
-                            sm:text-5xl
-                            lg:text-6xl
-                        "
-                    >
+                    <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
                         Technologies I{" "}
-
-                        <span
-                            className="
-                                bg-gradient-to-r
-                                from-cyan-300
-                                via-cyan-400
-                                to-blue-500
-                                bg-clip-text
-                                text-transparent
-                            "
-                        >
+                        <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
                             Work With
                         </span>
                     </h2>
 
-                    <p
-                        className="
-                            mx-auto
-                            mt-5
-                            max-w-2xl
-                            text-sm
-                            leading-7
-                            text-gray-400
-                            sm:text-base
-                            sm:leading-8
-                        "
-                    >
-                        A collection of technologies and tools I use
-                        to design, develop and deliver modern web
-                        applications.
+                    <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-gray-400 sm:text-base sm:leading-8">
+                        A collection of technologies and tools I use to design,
+                        develop and deliver modern web applications.
                     </p>
                 </motion.div>
 
-                {/* =========================
-                    SKILLS GRID
-                ========================= */}
-
-                <div
-                    className="
-                        grid
-                        gap-6
-                        md:grid-cols-2
-                        lg:grid-cols-3
-                        lg:gap-7
-                    "
-                >
-                    {skillCategories.map(
-                        (category, index) => (
-                            <SkillCard
-                                key={category.title}
-                                category={category}
-                                index={index}
-                            />
-                        )
-                    )}
+                {/* Skills Grid */}
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+                    {skillCategories.map((category, index) => (
+                        <SkillCard
+                            key={category.title}
+                            category={category}
+                            index={index}
+                        />
+                    ))}
                 </div>
 
-                {/* =========================
-                    BOTTOM DIVIDER
-                ========================= */}
-
+                {/* Bottom Divider */}
                 <motion.div
-                    initial={{
-                        scaleX: 0,
-                        opacity: 0,
-                    }}
-                    whileInView={{
-                        scaleX: 1,
-                        opacity: 1,
-                    }}
-                    viewport={{
-                        once: true,
-                    }}
-                    transition={{
-                        duration: 1,
-                        delay: 0.4,
-                    }}
-                    className="
-                        mt-16
-                        h-px
-                        origin-left
-                        bg-gradient-to-r
-                        from-transparent
-                        via-cyan-400/25
-                        to-transparent
-                        sm:mt-20
-                    "
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    whileInView={{ scaleX: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.4 }}
+                    className="mt-16 h-px origin-left bg-gradient-to-r from-transparent via-cyan-400/25 to-transparent sm:mt-20"
                 />
             </div>
         </section>
@@ -710,4 +469,3 @@ function Skills() {
 }
 
 export default Skills
-
