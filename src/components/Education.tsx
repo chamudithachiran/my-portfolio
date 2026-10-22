@@ -98,6 +98,7 @@ function EducationCard({
                 opacity: 1,
                 y: 0,
             }}
+            whileHover={{ y: -4 }}
             viewport={{
                 once: true,
                 amount: 0.2,
@@ -383,4 +384,3 @@ function Education() {
 }
 
 export default Education
-

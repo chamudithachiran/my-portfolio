@@ -7,15 +7,17 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   margin: 0;
-  background: #050505;
-  color: white;
+  background: #070a0f;
+  color: #f4f7fa;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 /* ========================= 
@@ -23,7 +25,7 @@ body {
 ========================= */
 
 ::selection {
-  background: rgba(34, 211, 238, 0.25);
+  background: rgba(34, 211, 238, 0.3);
   color: white;
 }
 
@@ -32,11 +34,11 @@ body {
 ========================= */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #070a0f;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -90,4 +92,10 @@ body {
   outline: 2px solid rgba(34, 211, 238, 0.6);
   outline-offset: 3px;
   border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

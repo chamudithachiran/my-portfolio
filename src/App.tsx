@@ -1,5 +1,6 @@
 import CursorSpotlight from "./components/CursorSpotlight"
 import ScrollProgressBar from "./components/ScrollProgressBar"
+import { MotionConfig } from "framer-motion"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
@@ -13,7 +14,7 @@ import Footer from "./components/Footer"
 
 function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       {/* Global Scroll Progress */}
       <ScrollProgressBar />
 
@@ -34,7 +35,7 @@ function App() {
       </main>
 
       <Footer />
-    </>
+    </MotionConfig>
   )
 }
 

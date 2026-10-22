@@ -132,6 +132,7 @@ function ServiceCard({
                 duration: 0.65,
                 delay: index * 0.08,
             }}
+            whileHover={{ y: -5 }}
             className="h-full"
         >
             <motion.div
@@ -342,4 +343,3 @@ function Services() {
 }
 
 export default Services
-

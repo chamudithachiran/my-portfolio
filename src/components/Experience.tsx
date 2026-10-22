@@ -74,6 +74,7 @@ function ExperienceCard() {
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ y: -4 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.8 }}
             className="relative mx-auto max-w-5xl"
@@ -439,4 +440,3 @@ function Experience() {
 }
 
 export default Experience
-

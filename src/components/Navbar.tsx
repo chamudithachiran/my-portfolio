@@ -69,22 +69,20 @@ function Navbar() {
 
     return (
         <nav
+            aria-label="Main navigation"
             className={`fixed left-0 top-0 z-50 w-full border-b transition-all duration-500 ${scrolled
-                    ? "border-cyan-400/10 bg-black/85 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
-                    : "border-white/10 bg-black/55 backdrop-blur-xl"
+                    ? "border-white/[0.08] bg-[#070a0f]/90 shadow-[0_10px_40px_rgba(0,0,0,0.25)] backdrop-blur-2xl"
+                    : "border-white/[0.06] bg-[#070a0f]/70 backdrop-blur-xl"
                 }`}
         >
-            {/* Top cyan glow */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
-
-            <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
                 {/* ==================== LOGO ==================== */}
 
                 <a
                     href="#home"
                     onClick={handleLinkClick}
-                    className="group relative shrink-0 text-xl font-bold tracking-wide text-white sm:text-2xl"
+                    className="group relative shrink-0 text-xl font-semibold tracking-tight text-white sm:text-2xl"
                 >
                     <span className="relative z-10">
                         Chamuditha
@@ -138,7 +136,7 @@ function Navbar() {
 
                 <a
                     href="#contact"
-                    className="group relative hidden overflow-hidden rounded-full border border-cyan-400/40 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-300 hover:bg-cyan-400 hover:text-black hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] lg:block"
+                    className="group relative hidden overflow-hidden rounded-full border border-cyan-400/30 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-200 transition-all duration-300 hover:border-cyan-300/70 hover:bg-cyan-400 hover:text-black lg:block"
                 >
                     <span className="relative z-10">Let's Talk</span>
 
@@ -274,4 +272,3 @@ function Navbar() {
 }
 
 export default Navbar
-

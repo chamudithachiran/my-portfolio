@@ -343,7 +343,7 @@ function ParticleBackground() {
         setCanvasSize()
 
         const particleCount =
-            window.innerWidth < 640 ? 55 : 120
+            window.innerWidth < 640 ? 30 : 65
 
         const particles: Particle[] = Array.from(
             { length: particleCount },
@@ -437,61 +437,8 @@ function ParticleBackground() {
         <canvas
             ref={canvasRef}
             className="pointer-events-none absolute inset-0 z-0"
-            style={{ opacity: 0.55 }}
+            style={{ opacity: 0.2 }}
         />
-    )
-}
-
-/* =========================================================
-   CURSOR GLOW
-========================================================= */
-
-function CursorGlow() {
-    const x = useMotionValue(-200)
-    const y = useMotionValue(-200)
-
-    const springX = useSpring(x, {
-        stiffness: 120,
-        damping: 18,
-    })
-
-    const springY = useSpring(y, {
-        stiffness: 120,
-        damping: 18,
-    })
-
-    useEffect(() => {
-        const move = (e: MouseEvent) => {
-            x.set(e.clientX)
-            y.set(e.clientY)
-        }
-
-        window.addEventListener(
-            "mousemove",
-            move
-        )
-
-        return () =>
-            window.removeEventListener(
-                "mousemove",
-                move
-            )
-    }, [x, y])
-
-    return (
-        <motion.div
-            className="pointer-events-none fixed z-50 hidden lg:block"
-            style={{
-                left: springX,
-                top: springY,
-                translateX: "-50%",
-                translateY: "-50%",
-            }}
-        >
-            <div className="h-64 w-64 rounded-full bg-cyan-400/[0.06] blur-[60px]" />
-
-            <div className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/40 blur-[2px]" />
-        </motion.div>
     )
 }
 
@@ -742,11 +689,9 @@ function Hero() {
 
     return (
         <>
-            <CursorGlow />
-
             <section
                 id="home"
-                className="relative min-h-screen overflow-hidden bg-[#02090f]"
+                className="relative min-h-screen overflow-hidden bg-[#070a0f]"
             >
                 <NoiseTexture />
 
@@ -790,7 +735,6 @@ function Hero() {
                         className="absolute right-0 top-[15%] h-[600px] w-[600px] rounded-full bg-blue-500/[0.05] blur-[150px]"
                     />
 
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.018)_1px,transparent_1px)] bg-[size:80px_80px]" />
                 </div>
 
                 {/* =================================================
@@ -1074,36 +1018,20 @@ function Hero() {
                                     repeat: Infinity,
                                     ease: "easeInOut",
                                 }}
-                                className="absolute h-[250px] w-[250px] rounded-full bg-cyan-400/15 blur-[90px] sm:h-[330px] sm:w-[330px]"
+                                className="absolute h-[250px] w-[250px] rounded-full bg-cyan-400/[0.08] blur-[90px] sm:h-[330px] sm:w-[330px]"
                             />
 
                             {/* Outer ring */}
-                            <motion.div
-                                animate={{
-                                    rotate: 360,
-                                }}
-                                transition={{
-                                    duration: 22,
-                                    repeat: Infinity,
-                                    ease: "linear",
-                                }}
+                            <div
                                 className="absolute h-[250px] w-[250px] rounded-full border border-cyan-400/[0.12] sm:h-[350px] sm:w-[350px] lg:h-[400px] lg:w-[400px]"
                             >
                                 <span className="absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-cyan-400 shadow-[0_0_18px_rgba(34,211,238,1)]" />
 
                                 <span className="absolute bottom-[8%] right-[12%] h-1.5 w-1.5 rounded-full bg-cyan-300/70 shadow-[0_0_12px_rgba(34,211,238,0.7)]" />
-                            </motion.div>
+                            </div>
 
                             {/* Dashed inner ring */}
-                            <motion.div
-                                animate={{
-                                    rotate: -360,
-                                }}
-                                transition={{
-                                    duration: 30,
-                                    repeat: Infinity,
-                                    ease: "linear",
-                                }}
+                            <div
                                 className="absolute h-[215px] w-[215px] rounded-full border border-dashed border-cyan-400/[0.18] sm:h-[300px] sm:w-[300px] lg:h-[360px] lg:w-[360px]"
                             />
 
