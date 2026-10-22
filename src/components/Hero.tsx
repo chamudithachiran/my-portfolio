@@ -132,7 +132,6 @@ function useTypewriter(
     speed = 75,
     pause = 2000
 ) {
-    const [displayed, setDisplayed] = useState("")
     const [wordIdx, setWordIdx] = useState(0)
     const [charIdx, setCharIdx] = useState(0)
     const [deleting, setDeleting] = useState(false)
@@ -154,16 +153,16 @@ function useTypewriter(
                 setCharIdx((c) => c - 1)
             }, speed / 2)
         } else if (deleting && charIdx === 0) {
-            setDeleting(false)
-            setWordIdx((i) => (i + 1) % words.length)
+            timeout = setTimeout(() => {
+                setDeleting(false)
+                setWordIdx((i) => (i + 1) % words.length)
+            }, 0)
         }
-
-        setDisplayed(current.slice(0, charIdx))
 
         return () => clearTimeout(timeout)
     }, [charIdx, deleting, wordIdx, words, speed, pause])
 
-    return displayed
+    return words[wordIdx].slice(0, charIdx)
 }
 
 /* =========================================================
@@ -1256,4 +1255,3 @@ function Hero() {
 }
 
 export default Hero
-

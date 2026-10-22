@@ -13,10 +13,8 @@ function initProgressBar() {
   document.body.appendChild(bar)
 
   let width = 0
-  let interval: ReturnType<typeof setInterval>
-
   // Fast start
-  interval = setInterval(() => {
+  const interval = setInterval(() => {
     if (width < 70) {
       width += Math.random() * 8
     } else if (width < 90) {
